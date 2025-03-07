@@ -6,4 +6,5 @@ logging
 dist
 .yarnrc.yml
 .tsbuildinfo
-
+.yarn
+.editorconfig
