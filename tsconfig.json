@@ -1,0 +1,46 @@
+{
+  "compilerOptions": {
+    "incremental": true,
+    "target": "ES2024",
+    "module": "CommonJS",
+    "lib": [
+      "ES2024"
+    ],
+    "tsBuildInfoFile": ".tsbuildinfo",
+    "strict": true,
+    "strictNullChecks": true,
+    "baseUrl": "./",
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "rootDir": "./",
+    "outDir": "./dist",
+    "forceConsistentCasingInFileNames": true,
+    "paths": {
+      "@src/*": [
+        "src/*"
+      ]
+    },
+    "useUnknownInCatchVariables": false,
+    "sourceMap": true,
+    "noImplicitAny": false,
+    "removeComments": true,
+    "newLine": "lf",
+  },
+  "ts-node": {
+    "swc": true,
+    "require": [
+      "tsconfig-paths/register",
+      "./config.ts"
+    ],
+  },
+  "include": [
+    "src/**/*.ts",
+    "spec/**/*.ts",
+    "config.ts",
+    "scripts",
+    "eslint.config.ts"
+  ],
+  "exclude": [
+    ".yarn"
+  ]
+}
