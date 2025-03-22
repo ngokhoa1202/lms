@@ -1,8 +1,8 @@
 import { Router } from 'express';
-import { configFwUserRoute } from './fwUser/user.route';
+import { configUserRoute } from './fwUser/user.route';
 
 const apiRouter = Router();
 
-configFwUserRoute(apiRouter);
+configUserRoute(apiRouter);
 
 export default apiRouter;

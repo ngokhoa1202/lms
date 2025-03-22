@@ -1,8 +1,9 @@
-import { createUser } from '@src/controller/user/user.controller';
+import { UserController } from '@src/controller/fwUser/user/user.controller';
+import { UserValidator } from '@src/controller/fwUser/user/validator/user.validator';
 import { Router } from 'express';
+import Middleware from '@src/middleware';
 
-export const configFwUserRoute = (router: Router) => {
+export const configUserRoute = (router: Router) => {
 
-  router.post('/framework/user', createUser);
-
+  router.post('/framework/users/login', Middleware.validate(UserValidator.login), UserController.login);
 };

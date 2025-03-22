@@ -41,7 +41,7 @@ export default tseslint.config(
       '@typescript-eslint/no-misused-promises': 0,
       '@typescript-eslint/no-floating-promises': 0,
       '@typescript-eslint/no-confusing-void-expression': 0,
-      '@typescript-eslint/no-unnecessary-condition': 0,
+      '@typescript-eslint/no-unnecessary-condition': 'error',
       '@typescript-eslint/restrict-plus-operands': [
         'warn', { allowNumberAndString: true }
       ],
@@ -52,7 +52,7 @@ export default tseslint.config(
       'max-len': [
         'warn',
         {
-          'code': 120
+          'code': 140
         }
       ],
       '@stylistic/ts/semi': ['warn', 'always'],
@@ -89,7 +89,30 @@ export default tseslint.config(
       'n/no-process-env': 0,
       'n/no-missing-import': 0,
       'n/no-unpublished-import': 0,
-      'prefer-const': 'warn'
+      'prefer-const': 'warn',
+      '@typescript-eslint/no-unsafe-assignment': 'error',
+      '@typescript-eslint/no-unsafe-call': 'error',
+      '@typescript-eslint/no-unsafe-member-access': 'error',
+      '@typescript-eslint/no-unsafe-return': 'error',
+      '@typescript-eslint/await-thenable': 'error',
+      '@typescript-eslint/class-literal-property-style': 1,
+      '@typescript-eslint/class-methods-use-this': 'warn',
+      '@typescript-eslint/dot-notation': 'warn',
+      '@typescript-eslint/init-declarations': 'error',
+      '@typescript-eslint/no-dupe-class-members': 'error',
+      '@typescript-eslint/no-duplicate-enum-values': 'error',
+      '@typescript-eslint/no-empty-function': 'warn',
+      '@typescript-eslint/no-explicit-any': 'error',
+      '@typescript-eslint/default-param-last': 'error',
+      '@typescript-eslint/no-misused-new': 'error',
+      '@typescript-eslint/no-require-imports': 'error',
+      '@typescript-eslint/prefer-as-const': 'warn',
+      '@typescript-eslint/prefer-destructuring': 'warn',
+      '@typescript-eslint/prefer-nullish-coalescing': 'warn',
+      '@typescript-eslint/prefer-optional-chain': 'warn',
+      '@typescript-eslint/prefer-readonly': 'warn',
+      '@typescript-eslint/promise-function-async': 'error',
+      '@typescript-eslint/require-await': 'error'
     }
   }
 );

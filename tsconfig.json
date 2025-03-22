@@ -24,6 +24,7 @@
     "sourceMap": true,
     "noImplicitAny": false,
     "removeComments": true,
+    "noUnusedParameters": false,
     "newLine": "lf",
   },
   "ts-node": {

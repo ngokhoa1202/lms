@@ -1,5 +1,5 @@
-import { logger } from './config/logger';
-import { ENV } from './config/env';
+import { logger } from './config/logger.config';
+import { ENV } from './config/env.config';
 
 import server from './server';
 

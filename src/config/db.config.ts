@@ -1,7 +1,9 @@
 import mongoose from 'mongoose';
-import { logger } from './logger';
+import { logger } from './logger.config';
 
-export const connectDb = async (host: string, port: number, username: string, password: string, dbName: string) => {
+export const connectDb = async (
+  host: string, port: number, username: string | null, password: string | null, dbName: string) => {
+
   try {
     await mongoose.connect(`mongodb://${host}:${port}/${dbName}`, {
       dbName,

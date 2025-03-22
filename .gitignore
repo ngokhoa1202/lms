@@ -8,3 +8,6 @@ dist
 .tsbuildinfo
 .yarn
 .editorconfig
+config.js
+.idea
+secrets
