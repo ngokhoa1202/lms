@@ -41,4 +41,5 @@ const login = [
   body('password').trim().escape().notEmpty().withMessage('Password is required')
 ];
 
-export const UserValidator = { gettingById, creation, update, login };
+const UserValidator = { gettingById, creation, update, login };
+export default UserValidator;

@@ -1,4 +1,4 @@
-import { IUserCreationDto } from '@src/controller/fwUser/user/dto/user.dto';
+import { IUserCreationDto } from '@src/controller/framework/user/dto/user.dto';
 
 
 export interface IInstructorCreationDto extends IUserCreationDto {

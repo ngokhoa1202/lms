@@ -2,10 +2,11 @@
   "compilerOptions": {
     "incremental": true,
     "target": "ES2024",
-    "module": "CommonJS",
+    "module": "ES2020",
     "lib": [
       "ES2024"
     ],
+    "moduleResolution": "node",
     "tsBuildInfoFile": ".tsbuildinfo",
     "strict": true,
     "strictNullChecks": true,

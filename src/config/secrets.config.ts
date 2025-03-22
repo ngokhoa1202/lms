@@ -17,4 +17,13 @@ function readSecrets(fileName: string, type: string): string {
 const PRIVATE_KEY = readSecrets('private-key.pem', 'private key');
 const PUBLIC_KEY = readSecrets('public-key.pem', 'public key');
 const ISSUER = 'CareerWise';
-export const SECRETS = { PRIVATE_KEY, PUBLIC_KEY, ISSUER };
+const SUBJECT = {
+  ACCESS: 'LMS - Apollo'
+};
+const ALGORITHM = 'RS512';
+const AUDIENCE = ['LMS - Hera', 'LMS - Athena', 'LMS - Artemis'];
+const EXPIRATION = {
+  TIME: 72,
+  UNIT: 'h'
+};
+export const SECRETS = { PRIVATE_KEY, PUBLIC_KEY, ISSUER, SUBJECT, AUDIENCE, ALGORITHM, EXPIRATION };

@@ -1,6 +1,6 @@
 import { NextFunction, Request, Response } from 'express';
 import HttpStatusCodes from '@src/controller/HttpStatusCodes';
-import { IUserCreationDto, IUserDto, IUserLoginDto, IUserUpdateDto } from '@src/controller/fwUser/user/dto/user.dto';
+import { IUserCreationDto, IUserDto, IUserLoginDto, IUserUpdateDto } from '@src/controller/framework/user/dto/user.dto';
 import { validationResult } from 'express-validator';
 import { UserService } from '@src/service/fwUser/user/user.service';
 
@@ -64,9 +64,9 @@ const deleteUserById = async (req: Request, res: Response, next: NextFunction) =
 
 const login = async (req: Request, res: Response, next: NextFunction) => {
   try {
-    const dto = req.body as IUserLoginDto;
-
-    res.json();
+    const user = req.body as IUserLoginDto;
+    const token = await UserService.login(user);
+    res.json(HttpStatusCodes.OK).send(token);
   } catch (error) {
     next(error);
   }

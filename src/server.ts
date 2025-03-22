@@ -8,7 +8,7 @@ import apiRouter from './routes';
 import { connectDb } from './config/db.config';
 import swaggerUi from 'swagger-ui-express';
 import { swaggerDocs } from './config/swagger.config';
-import Middleware from './middleware';
+import Middleware from './middleware/index.middleware';
 
 (async () => {
   await connectDb(ENV.DbHost, ENV.DbPort, ENV.DbUsername, ENV.DbPassword, ENV.DbName);

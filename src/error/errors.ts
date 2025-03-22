@@ -70,13 +70,13 @@ export class EntityAlreadyExistedError extends AppliationError {
 
 export class UnauthorizedError extends AppliationError {
 
-  private constructor() {
-    super('undefined', 'Credentials are unauthorized');
+  private constructor(...fields: string[]) {
+    super('Credentials are unauthorized', ...fields);
     Object.setPrototypeOf(this, UnauthorizedError.prototype);
   }
 
-  public static of(): UnauthorizedError {
-    return new UnauthorizedError();
+  public static of(...fields: string[]): UnauthorizedError {
+    return new UnauthorizedError(...fields);
   }
 
   public override toRestError(): RestError {
