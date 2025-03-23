@@ -11,17 +11,17 @@ export interface IInstructor extends IUser {
   certificates: [ICertificate];
   expertise: number;
   biography: string;
-  age: number;
+  dateOfBirth: Date;
   nationality: ICountry;
 }
 
 const instructorSchema = new mongoose.Schema<IInstructor>({
   degrees: { type: [mongoose.Schema.Types.ObjectId], ref: 'Degree', default: [], maxlength: 10, required: false },
   nationality: { type: mongoose.Schema.Types.ObjectId, ref: 'Country', required: true },
-  majors: { type: [String], maxlength: 255, default: [] },
+  majors: { type: [String], maxlength: 10, default: [], required: false },
   certificates: { type: [mongoose.Schema.Types.ObjectId], ref: 'Certificate', default: [], required: false, maxlength: 50 },
   expertise: { type: Number, default: 0, max: 50 },
-  age: { type: Number, min: 18, max: 65, required: true },
+  dateOfBirth: { type: Date, required: true, min: new Date('1960-01-01') },
   biography: { type: String, maxlength: 1022, default: '', required: false }
 });
 

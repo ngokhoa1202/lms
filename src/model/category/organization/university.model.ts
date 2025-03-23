@@ -1,5 +1,4 @@
-import mongoose, { Document } from 'mongoose';
-import { ICity } from '@src/model/category/country/city.model';
+import mongoose from 'mongoose';
 import Organization, { IOrganization } from '@src/model/category/organization/organization.model';
 import { OrganizationType } from '@src/constants/enum/organization/organizationType.enum';
 

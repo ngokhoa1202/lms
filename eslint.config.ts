@@ -69,7 +69,7 @@ export default tseslint.config(
           'interface': {
             'singleline': {
               'delimiter': 'semi',
-              'requireLast': false
+              'requireLast': true
             },
             'multiline': {
               'delimiter': 'semi',

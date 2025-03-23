@@ -1,5 +1,5 @@
 import User, { IUser } from '@src/model/framework/user/user.model';
-import { IUserCreationDto, IUserDto, IUserLoginDto, IUserUpdateDto } from '@src/controller/framework/user/dto/user.dto';
+import { IUserLoginDto } from '@src/controller/framework/user/dto/user.dto';
 import bcrypt from 'bcrypt';
 
 import { IAccessToken } from '@src/controller/framework/user/dto/token.dto';
@@ -30,5 +30,7 @@ const login = async (dto: IUserLoginDto): Promise<IAccessToken> => {
   const token = sign({ id: user._id, role: user.role }, SECRETS.PRIVATE_KEY, options);
   return { token, expiration: Util.dayjs().add(SECRETS.EXPIRATION.TIME, SECRETS.EXPIRATION.UNIT as ManipulateType).unix() };
 };
+
+
 
 export const UserService = { login };

@@ -25,7 +25,6 @@
     "express": "^4.21.2",
     "express-async-errors": "^3.1.1",
     "express-validator": "^7.2.1",
-    "he": "^1.2.0",
     "helmet": "^8.0.0",
     "inserturlparams": "^2.0.5",
     "jsonfile": "^6.1.0",

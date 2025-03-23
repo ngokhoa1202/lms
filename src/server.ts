@@ -4,7 +4,7 @@ import express from 'express';
 import 'express-async-errors';
 import { ENV } from './config/env.config';
 import { NodeEnv } from './constants/NodeEnv';
-import apiRouter from './routes';
+import apiRouter from './routes/index.route';
 import { connectDb } from './config/db.config';
 import swaggerUi from 'swagger-ui-express';
 import { swaggerDocs } from './config/swagger.config';

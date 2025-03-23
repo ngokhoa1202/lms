@@ -1,22 +1,30 @@
-import { EmploymentStatus } from '@src/constants/enum/employmentStatus.enum';
 import User, { IUser } from './user.model';
 import mongoose from 'mongoose';
-import { IUniversity } from '@src/model/category/organization/university.model';
 import { UserRole } from '@src/constants/enum/user/userRole.enum';
+import { ICity } from '@src/model/category/country/city.model';
+import { ICountry } from '@src/model/category/country/country.model';
 
 
 export interface IStudent extends IUser {
-  interests: [string];
-  employmentStatus: EmploymentStatus;
-  major: string;
-  university: IUniversity;
+  studentId: string;
+  majors: [string];
+  temporaryAddress: string;
+  temporaryCity: ICity;
+  permanentAddress: string;
+  permanentCity: ICity;
+  dateOfBirth: Date;
+  nationality: ICountry;
 }
 
 const studentSchema = new mongoose.Schema<IStudent>({
-  interests: { type: [String], maxlength: 255, default: [] },
-  employmentStatus: { type: String, enum: Object.values(EmploymentStatus), default: EmploymentStatus.UNEMPLOYED },
-  major: { type: String, maxlength: 255, required: true },
-  university: { type: mongoose.Schema.Types.ObjectId, ref: 'University', required: true }
-}, { collection: 'users' });
+  studentId: { type: String, required: true, unique: true, maxlength: 63 },
+  majors: { type: [String], maxlength: 10, required: true },
+  temporaryAddress: { type: String, required: true, maxlength: 255 },
+  temporaryCity: { type: mongoose.Schema.Types.ObjectId, ref: 'City', required: true },
+  permanentAddress: { type: String, required: true, maxlength: 255 },
+  permanentCity: { type: mongoose.Schema.Types.ObjectId, ref: 'City', required: true },
+  dateOfBirth: { type: Date, required: true, min: new Date('1960-01-01') },
+  nationality: { type: mongoose.Schema.Types.ObjectId, ref: 'Country', required: true }
+});
 
 export const Student = User.discriminator(UserRole.STUDENT, studentSchema);

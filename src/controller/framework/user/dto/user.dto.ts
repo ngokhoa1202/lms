@@ -8,7 +8,7 @@ export interface IUserCreationDto {
 }
 
 export interface IUserUpdateDto {
-  username: string;
+  username: string | null | undefined;
   role: string;
   firstName: string;
   lastName: string;

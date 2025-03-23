@@ -6,9 +6,9 @@ export interface ICorporation extends IOrganization {
   strengths: string[];
 }
 
-const coporationSchema = new mongoose.Schema<ICorporation>({
+const corporationSchema = new mongoose.Schema<ICorporation>({
   strengths: { type: [String], required: false, maxlength: 1024 }
 });
 
-const Corporation = Organization.discriminator<ICorporation>(OrganizationType.CORPORATION, coporationSchema);
+const Corporation = Organization.discriminator<ICorporation>(OrganizationType.CORPORATION, corporationSchema);
 export default Corporation;

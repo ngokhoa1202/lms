@@ -7,10 +7,8 @@ export interface ICertificate extends Document {
   organization: ICorporation;
   validityDuration: number;
   totalScore: number;
-  issueDate: Date;
-  verificationCode: string;
   isVerified: boolean;
-  subject: string;
+  subjects: string[];
 }
 
 const certificateSchema = new mongoose.Schema<ICertificate>({
@@ -19,9 +17,7 @@ const certificateSchema = new mongoose.Schema<ICertificate>({
   organization: { type: mongoose.Schema.Types.ObjectId, ref: 'Corporation', required: true },
   validityDuration: { type: Number, required: true, min: 0, max: 100 },
   totalScore: { type: Number, required: true },
-  verificationCode: { type: String, required: false, maxlength: 255 },
-  issueDate: { type: Date, required: true },
-  subject: { type: String, required: true, maxlength: 255 },
+  subjects: { type: [String], required: true, maxlength: 255 },
   isVerified: { type: Boolean, required: true, default: false }
 }, { _id: false, collection: 'certificates' });
 
