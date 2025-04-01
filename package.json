@@ -2,16 +2,17 @@
   "name": "express-node",
   "version": "1.0.0",
   "scripts": {
-    "build": "ts-node ./scripts/build.ts",
+    "build": "tsx ./scripts/build.ts",
     "clean-install": "rm -rf ./node_modules && rm -r package-lock.json && npm i",
-    "dev": "NODE_ENV=development ts-node ./src",
-    "dev:hot": "nodemon --exec \"npm run dev\" --watch ./src --ext .ts",
-    "lint": "eslint --flag unstable_ts_config",
+    "dev": "NODE_ENV=development tsx ./src",
+    "dev:hot": "tsx --watch ./src --ext .ts",
+    "lint": "eslint .",
     "start": "NODE_ENV=production node -r ./config.js ./dist",
     "test": "NODE_ENV=test ts-node ./spec",
     "test:hot": "nodemon --exec \"npm run test\" --watch ./src --watch ./spec --ext .ts",
     "type-check": "tsc --noEmit",
-    "lint:fix": "eslint -c eslint.config.ts --fix ."
+    "lint:fix": "eslint -c eslint.config.ts --fix .",
+    "seed": "tsx ./src/model/index.seed.ts"
   },
   "license": "MIT",
   "engines": {
@@ -49,7 +50,6 @@
     "@types/express-validator": "^3.0.2",
     "@types/find": "^0.2.4",
     "@types/fs-extra": "^11.0.4",
-    "@types/he": "^1.2.3",
     "@types/jasmine": "^5.1.7",
     "@types/jsonfile": "^6.1.4",
     "@types/jsonwebtoken": "^9.0.9",
@@ -71,11 +71,11 @@
     "swagger-jsdoc": "^6.2.8",
     "swagger-ui-dist": "^5.20.1",
     "swagger-ui-express": "^5.0.1",
-    "ts-node": "^10.9.2",
     "tsconfig-paths": "^4.2.0",
+    "tsx": "^4.19.3",
     "typescript": "^5.7.3",
     "typescript-eslint": "^8.24.1"
   },
-  "type": "commonjs",
+  "type": "module",
   "packageManager": "yarn@1.22.22"
 }

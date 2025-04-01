@@ -1,18 +1,18 @@
-import { ICountry } from '@src/model/category/country/country.model';
-import mongoose from 'mongoose';
+import { ICountryDocument } from '@src/model/category/country/country.model';
+import mongoose, {Document} from 'mongoose';
 
-export interface ICity {
+export interface ICityDocument extends Document {
   _id: number;
   name: string;
-  country: ICountry;
+  country: ICountryDocument;
 }
 
-const citySchema = new mongoose.Schema<ICity>({
+const citySchema = new mongoose.Schema<ICityDocument>({
   _id: { type: Number, required: true },
   name: { type: String, required: true },
   country: { type: mongoose.Schema.Types.ObjectId, ref: 'Country', required: true }
 }, { _id: false, collection: 'cities', versionKey: true });
 
-const City = mongoose.model<ICity>('City', citySchema, 'citites');
+const City = mongoose.model<ICityDocument>('City', citySchema, 'cities');
 export default City;
 

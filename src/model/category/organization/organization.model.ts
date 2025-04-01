@@ -1,13 +1,12 @@
-import mongoose, { Document } from 'mongoose';
-import { ICity } from '@src/model/category/country/city.model';
 import { OrganizationType } from '@src/constants/enum/organization/organizationType.enum';
-import { v4 as uuidv4 } from 'uuid';
+import { ICityDocument } from '@src/model/category/country/city.model';
+import mongoose, { Document } from 'mongoose';
 
-export interface IOrganization extends Document {
-  _id: number;
+export interface IOrganizationDocument extends Document {
+  _id: string;
   fullName: string;
   shortName: string;
-  city: ICity;
+  city: ICityDocument;
   location: string;
   websiteURL: string;
   isActive: boolean;
@@ -15,7 +14,7 @@ export interface IOrganization extends Document {
   emailSuffix: string;
 }
 
-const organizationSchema = new mongoose.Schema<IOrganization>({
+const organizationSchema = new mongoose.Schema<IOrganizationDocument>({
   _id: { type: Number, required: true, index: true },
   fullName: { type: String, required: true, maxlength: 255 },
   shortName: { type: String, required: false, maxlength: 255 },
@@ -25,8 +24,19 @@ const organizationSchema = new mongoose.Schema<IOrganization>({
   isActive: { type: Boolean, required: true, default: true },
   type: { type: String, required: true, enum: Object.values(OrganizationType) },
   emailSuffix: { type: String, required: true, maxlength: 255, default: '@gmail.com' }
-}, { timestamps: true, _id: false, versionKey: true, collection: 'universities' });
+}, { timestamps: true, _id: true, versionKey: true, collection: 'organizations' });
 
+export interface IOrganizationModel {
+  _id: string;
+  fullName: string;
+  shortName: string;
+  city: ICityDocument;
+  location: string;
+  websiteURL: string;
+  isActive: boolean;
+  type: OrganizationType;
+  emailSuffix: string;
+}
 
-const Organization = mongoose.model<IOrganization>('University', organizationSchema, 'universities');
+const Organization = mongoose.model<IOrganizationDocument>('Organization', organizationSchema, 'organizations');
 export default Organization;

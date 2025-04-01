@@ -1,7 +1,7 @@
 import HttpStatusCodes from '@src/controller/HttpStatusCodes';
 import { RestError } from '@src/middleware/errorHandler.middleware';
 
-export abstract class AppliationError extends Error {
+export abstract class ApplicationError extends Error {
   public readonly message: string;
   public readonly fields: string[];
 
@@ -9,7 +9,7 @@ export abstract class AppliationError extends Error {
     super(message);
     this.fields = [...fields];
     this.message = message;
-    Object.setPrototypeOf(this, AppliationError.prototype);
+    Object.setPrototypeOf(this, ApplicationError.prototype);
   }
 
   public abstract toRestError(): RestError;
@@ -19,7 +19,7 @@ export abstract class AppliationError extends Error {
   }
 }
 
-export class InvalidFieldError extends AppliationError {
+export class InvalidFieldError extends ApplicationError {
 
   private constructor(message: string, ...fields: string[]) {
     super(message, ...fields);
@@ -27,7 +27,7 @@ export class InvalidFieldError extends AppliationError {
   }
 
   public static of(field: string, message: string | null | undefined): InvalidFieldError {
-    return new InvalidFieldError(field, message ?? `${field} is invalid`);
+    return new InvalidFieldError(message ?? `${field} is invalid`, field);
   }
 
   public override toRestError(): RestError {
@@ -35,7 +35,7 @@ export class InvalidFieldError extends AppliationError {
   }
 }
 
-export class EntityNotFoundError extends AppliationError {
+export class EntityNotFoundError extends ApplicationError {
 
   private constructor(entity: string, field: string) {
     super(`${entity} is not found`, field);
@@ -52,7 +52,7 @@ export class EntityNotFoundError extends AppliationError {
 }
 
 
-export class EntityAlreadyExistedError extends AppliationError {
+export class EntityAlreadyExistedError extends ApplicationError {
 
   private constructor(entity: string, field: string) {
     super(`${entity} is already existed`, field);
@@ -68,7 +68,7 @@ export class EntityAlreadyExistedError extends AppliationError {
   }
 }
 
-export class UnauthorizedError extends AppliationError {
+export class UnauthorizedError extends ApplicationError {
 
   private constructor(...fields: string[]) {
     super('Credentials are unauthorized', ...fields);
@@ -84,7 +84,7 @@ export class UnauthorizedError extends AppliationError {
   }
 }
 
-export class BusinessError extends AppliationError {
+export class BusinessError extends ApplicationError {
 
   private constructor(message: string, ...fields: string[]) {
     super(message, ...fields);
@@ -100,7 +100,7 @@ export class BusinessError extends AppliationError {
   }
 }
 
-export class InternalServerError extends AppliationError {
+export class InternalServerError extends ApplicationError {
 
   private constructor(message: string) {
     super(message, 'unknown');

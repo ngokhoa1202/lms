@@ -2,7 +2,8 @@
 import { Request, Response, NextFunction } from 'express';
 import HttpStatusCodes from '@src/controller/HttpStatusCodes';
 import { MongoServerError } from 'mongodb';
-import { AppliationError, EntityAlreadyExistedError, InternalServerError } from '@src/error/errors';
+import { ApplicationError, EntityAlreadyExistedError, InternalServerError } from '@src/error/errors';
+import Logger from '@src/config/logger.config';
 
 
 /**
@@ -22,28 +23,41 @@ export class RestError extends Error {
     this.timestamp = new Date();
   }
 
-  public static convert(error: MongoServerError): AppliationError {
+  private static extractEntityName(error: MongoServerError): string {
+
+    const collectionRegex = /collection: \w+\.\w+\s/;
+    const collectionNameMatch = collectionRegex.exec(error.errmsg);
+
+    // extract collection name
+    if (!collectionNameMatch) return 'unknown';
+    const firstPosition = collectionNameMatch[0].indexOf('.') + 1;
+    return collectionNameMatch[0].substring(firstPosition, collectionNameMatch[0].length - 2);
+  }
+
+  public static convert(error: MongoServerError): ApplicationError {
     if (error.code === 11000) {
+      const collectionName = RestError.extractEntityName(error);
       const o = error.errmsg.substring(error.errmsg.indexOf('{'));
       const field = o.substring(o.indexOf(' ') + 1, o.indexOf(':') - o.indexOf(' ') + 1);
-      return EntityAlreadyExistedError.of('unknown', field);
+      return EntityAlreadyExistedError.of(collectionName, field);
     }
     return InternalServerError.of(error.message);
   }
 
 
   public static accept(error: Error): RestError {
-    if (error instanceof AppliationError) {
+    if (error instanceof ApplicationError) {
       return error.toRestError();
     }
     if (error instanceof MongoServerError) {
       return RestError.convert(error).toRestError();
     }
-    return AppliationError.default(error.message).toRestError();
+    return ApplicationError.default(error.message).toRestError();
   }
 }
 
 export const handleError = (error: Error, req: Request, res: Response, next: NextFunction) => {
+  Logger.error(error);
   const e = RestError.accept(error);
   res.status(e.status).json(e);
 };

@@ -2,14 +2,12 @@ export interface IUserCreationDto {
   username: string | null | undefined;
   email: string;
   password: string;
-  role: string;
   firstName: string;
   lastName: string;
 }
 
 export interface IUserUpdateDto {
   username: string | null | undefined;
-  role: string;
   firstName: string;
   lastName: string;
 }

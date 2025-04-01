@@ -1,6 +1,6 @@
 import fs from 'fs-extra';
 import childProcess from 'child_process';
-import { logger } from '@src/config/logger.config';
+import { Logger } from '@src/config/logger.config';
 
 /**
  * Start
@@ -16,7 +16,7 @@ import { logger } from '@src/config/logger.config';
     await copy('./temp/src', './dist');
     await remove('./temp/');
   } catch (err) {
-    logger.error(err);
+    Logger.error(err);
     // eslint-disable-next-line n/no-process-exit
     process.exit(1);
   }
@@ -51,10 +51,10 @@ async function exec(cmd: string, loc: string): Promise<void> {
   return new Promise((res, rej) => {
     return childProcess.exec(cmd, { cwd: loc }, (err, stdout, stderr) => {
       if (!!stdout) {
-        logger.info(stdout);
+        Logger.info(stdout);
       }
       if (!!stderr) {
-        logger.warn(stderr);
+        Logger.warn(stderr);
       }
       return (!!err ? rej(err) : res());
     });

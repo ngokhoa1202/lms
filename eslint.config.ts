@@ -22,7 +22,8 @@ export default tseslint.config(
       parserOptions: {
         project: './tsconfig.json',
         warnOnUnsupportedTypeScriptVersion: false,
-        unstableTsConfig: false
+        unstableTsConfig: false,
+        ecmaVersion: 2024
       }
     }
   },

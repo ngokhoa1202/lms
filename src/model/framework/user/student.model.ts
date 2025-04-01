@@ -1,19 +1,19 @@
-import User, { IUser } from './user.model';
+import User, { IUserDocument } from './user.model';
 import mongoose from 'mongoose';
 import { UserRole } from '@src/constants/enum/user/userRole.enum';
-import { ICity } from '@src/model/category/country/city.model';
-import { ICountry } from '@src/model/category/country/country.model';
+import { ICityDocument } from '@src/model/category/country/city.model';
+import { ICountryDocument } from '@src/model/category/country/country.model';
 
 
-export interface IStudent extends IUser {
+export interface IStudent extends IUserDocument {
   studentId: string;
   majors: [string];
   temporaryAddress: string;
-  temporaryCity: ICity;
+  temporaryCity: ICityDocument;
   permanentAddress: string;
-  permanentCity: ICity;
+  permanentCity: ICityDocument;
   dateOfBirth: Date;
-  nationality: ICountry;
+  nationality: ICountryDocument;
 }
 
 const studentSchema = new mongoose.Schema<IStudent>({

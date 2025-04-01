@@ -1,11 +1,11 @@
 import { TeachingRole } from '@src/constants/enum/user/teachingRole.enum';
 import { Document } from 'mongoose';
 import mongoose from 'mongoose';
-import { IInstructor } from '@src/model/framework/user/instructor.model';
+import { IInstructorDocument } from '@src/model/framework/user/instructor.model';
 import { ICourse } from '@src/model/framework/course/course.model';
 
 export interface IInstructorCourse extends Document {
-  instructor: IInstructor;
+  instructor: IInstructorDocument;
   course: ICourse;
   roles: TeachingRole[];
   assignedAt: Date;

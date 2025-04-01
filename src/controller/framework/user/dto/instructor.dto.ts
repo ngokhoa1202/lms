@@ -1,13 +1,14 @@
 import { AcademicGrade } from '@src/constants/enum/degree/academicGrade.enum';
 import { AcademicRank } from '@src/constants/enum/degree/academicRank.enum';
 import { StudyFormat } from '@src/constants/enum/degree/studyFormat.enum';
-import { IUserCreationDto } from '@src/controller/framework/user/dto/user.dto';
+import { IUserDto } from '@src/controller/framework/user/dto/user.dto';
+import { ICorporation } from '@src/model/category/organization/corporation.model';
 
 interface IDegreeDto {
   rank: AcademicRank;
   major: string;
   issueDate: Date;
-  universityId: number;
+  universityId: string;
   studyFormat: StudyFormat;
   grade: AcademicGrade;
 }
@@ -15,10 +16,20 @@ interface IDegreeDto {
 interface ICertificateDto {
   issueDate: Date;
   score: number;
-  id: number;
+  typeId: number;
 }
 
-export interface IInstructorCreationDto extends IUserCreationDto {
+interface IInstructorCertificateDto {
+  id: number;
+  name: string;
+  organization: ICorporation;
+  totalScore: number;
+  issueDate: Date;
+  score: number;
+
+}
+
+export interface IInstructorCreationDto {
   degrees: IDegreeDto[];
   majors: string[];
   certificates: ICertificateDto[];
@@ -26,4 +37,9 @@ export interface IInstructorCreationDto extends IUserCreationDto {
   biography: string;
   dateOfBirth: Date;
   nationalityId: number;
+}
+
+export interface IInstructorDto extends IUserDto {
+  majors: string[];
+  certificates;
 }

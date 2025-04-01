@@ -1,34 +1,45 @@
 import { AcademicRank } from '@src/constants/enum/degree/academicRank.enum';
 import mongoose, { Document } from 'mongoose';
-import { IUniversity } from '@src/model/category/organization/university.model';
+import { IUniversityDocument, IUniversityModel } from '@src/model/category/organization/university.model';
 import { StudyFormat } from '@src/constants/enum/degree/studyFormat.enum';
 import { AcademicGrade } from '@src/constants/enum/degree/academicGrade.enum';
-import { IFaculty } from '@src/model/category/faculty/faculty.model';
+import { IFacultyDocument, IFacultyModel } from '@src/model/category/faculty/faculty.model';
 
 
-export interface IDegree extends Document {
-  _id: number;
+export interface IDegreeDocument extends Document {
   rank: AcademicRank;
   major: string;
   issueDate: Date;
-  university: IUniversity;
-  faculty: IFaculty;
+  university: IUniversityDocument;
+  faculty: IFacultyDocument;
   isVerified: boolean;
   studyFormat: StudyFormat;
   grade: AcademicGrade;
 }
 
 
-const degreeSchema = new mongoose.Schema<IDegree>({
-  _id: { type: Number, required: true },
+const degreeSchema = new mongoose.Schema<IDegreeDocument>({
   rank: { type: String, enum: AcademicRank, required: true },
   major: { type: String, required: true, maxlength: 255 },
   issueDate: { type: Date, required: true },
   university: { type: mongoose.Schema.Types.ObjectId, ref: 'University', required: true },
+  faculty: { type: mongoose.Schema.Types.ObjectId, ref: 'Faculty', required: true },
   isVerified: { type: Boolean, required: true, default: false },
   studyFormat: { type: String, enum: StudyFormat, required: true, default: StudyFormat.FULL_TIME },
   grade: { type: String, enum: AcademicGrade, required: false }
-}, { _id: false, collection: 'degrees', timestamps: true, versionKey: true });
+}, { _id: true, collection: 'degrees', timestamps: true, versionKey: true });
 
-const Degree = mongoose.model<IDegree>('Degree', degreeSchema, 'degrees');
+export interface IDegreeModel {
+  _id: string;
+  rank: AcademicRank;
+  major: string;
+  issueDate: Date;
+  university: IUniversityModel;
+  faculty: IFacultyModel;
+  isVerified: boolean;
+  studyFormat: StudyFormat;
+  grade: AcademicGrade;
+}
+
+const Degree = mongoose.model<IDegreeDocument>('Degree', degreeSchema, 'degrees');
 export default Degree;

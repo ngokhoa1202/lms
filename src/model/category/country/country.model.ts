@@ -1,16 +1,22 @@
-import mongoose from 'mongoose';
+import mongoose, { Document } from 'mongoose';
 
-export interface ICountry {
-  _id: number;
+export interface ICountryDocument extends Document {
+  name: string;
   countryCode: string;
   isoCodes: string[];
 }
 
-const countrySchema = new mongoose.Schema<ICountry>({
-  _id: { type: Number, required: true },
+const countrySchema = new mongoose.Schema<ICountryDocument>({
   countryCode: { type: String, required: true },
   isoCodes: { type: [String], required: true }
-}, { _id: false, collection: 'countries' });
+}, { _id: true, collection: 'countries' });
 
-const Country = mongoose.model<ICountry>('Country', countrySchema, 'countries');
+export interface ICountryModel {
+  _id: string;
+  name: string;
+  countryCode: string;
+  isoCodes: string[];
+}
+
+const Country = mongoose.model<ICountryDocument>('Country', countrySchema, 'countries');
 export default Country;

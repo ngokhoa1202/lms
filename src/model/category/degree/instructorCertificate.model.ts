@@ -1,18 +1,18 @@
-import { IInstructor } from '@src/model/framework/user/instructor.model';
+import { IInstructorDocument } from '@src/model/framework/user/instructor.model';
 import mongoose, { Document } from 'mongoose';
-import { ICertificate } from '@src/model/category/degree/certificate.model';
-import { IOrganization } from '@src/model/category/organization/organization.model'';;;;;;;;;
+import { ICertificateDocument } from '@src/model/category/degree/certificate.model';
+import { IOrganizationDocument } from '@src/model/category/organization/organization.model';
 
 export interface IInstructorCertificate extends Document {
-  instructor: IInstructor;
-  certificate: ICertificate;
+  instructor: IInstructorDocument;
+  certificate: ICertificateDocument;
   issueDate: Date;
   score: number;
   validityDuration: number;
   isVerified: boolean;
   verificationDate: Date;
   verificationNote: string;
-  verifiedBy: IOrganization;
+  verifiedBy: IOrganizationDocument;
 }
 
 const instructorCertificateSchema = new mongoose.Schema<IInstructorCertificate>({
@@ -27,4 +27,5 @@ const instructorCertificateSchema = new mongoose.Schema<IInstructorCertificate>(
   verifiedBy: { type: mongoose.Schema.ObjectId, ref: 'Organization', required: false }
 }, { timestamps: true });
 
-const InstructorCertificate = mongoose.model<IInstructorCertificate>('InstructorCertificate', instructorCertificateSchema, 'instructors_certificates');
+const InstructorCertificate = mongoose.model<IInstructorCertificate>('InstructorCertificate',
+  instructorCertificateSchema, 'instructors_certificates');

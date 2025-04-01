@@ -1,3 +1,4 @@
+import path from 'path';
 import swaggerJSDoc, { Options } from 'swagger-jsdoc';
 
 const swaggerOptions: Options = {
@@ -9,7 +10,7 @@ const swaggerOptions: Options = {
       description: 'Typescript Swagger API for a LMS'
     }
   },
-  apis: [__dirname + '/../routes/*.ts']
+  apis: [path.resolve(process.cwd(), 'src', 'routes', '*.ts')]
 };
 
 export const swaggerDocs = swaggerJSDoc(swaggerOptions);

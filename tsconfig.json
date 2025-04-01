@@ -2,7 +2,7 @@
   "compilerOptions": {
     "incremental": true,
     "target": "ES2024",
-    "module": "ES2020",
+    "module": "CommonJS",
     "lib": [
       "ES2024"
     ],

@@ -1,9 +1,7 @@
 import mongoose from 'mongoose';
-import { logger } from './logger.config';
+import Logger from './logger.config';
 
-export const connectDb = async (
-  host: string, port: number, username: string | null, password: string | null, dbName: string) => {
-
+export const connectDb = async (host: string, port: number, username: string | null, password: string | null, dbName: string) => {
   try {
     await mongoose.connect(`mongodb://${host}:${port}/${dbName}`, {
       dbName,
@@ -11,8 +9,8 @@ export const connectDb = async (
       pass: password ?? '',
       sanitizeFilter: true
     });
-    logger.info('Successfully Connected to mongoDB');
+    Logger.info('Successfully Connected to mongoDB');
   } catch (err) {
-    logger.error(err);
+    Logger.error(err);
   }
 };

@@ -1,8 +1,9 @@
+import path from 'path';
 import winston from 'winston';
 import 'winston-daily-rotate-file';
 
 
-export const logger = winston.createLogger({
+const Logger = winston.createLogger({
   level: 'info',
   format: winston.format.combine(
     winston.format.timestamp({ format: 'YYYY-MM-DD HH:mm:ss' }),
@@ -13,27 +14,44 @@ export const logger = winston.createLogger({
       return stack
         ? `${timeStr} [${level.toUpperCase()}]: ${msgStr} \nStack: ${stackStr}`
         : `${timeStr} [${level.toUpperCase()}]: ${msgStr}`;
-    })
+    }),
+    winston.format.errors({ stack: true }),
+    winston.format.colorize({ all: true })
   ),
 
   transports: [
     new winston.transports.Console(),
     new winston.transports.DailyRotateFile({
-      filename: 'error.log',
-      level: 'error',
-      dirname: '../logging/error',
-      maxSize: '10m',
-      maxFiles: '14d',
-      zippedArchive: true,
-      datePattern: 'YYYY-MM-DD'
-    }),
-    new winston.transports.DailyRotateFile({
       filename: 'app.log',
-      dirname: '../logging/app',
+      dirname: path.resolve(process.cwd(), 'logging', 'app'),
       maxSize: '10m',
       maxFiles: '14d',
-      zippedArchive: true,
+      zippedArchive: false,
       datePattern: 'YYYY-MM-DD'
+    })
+  ],
+  exceptionHandlers: [
+    new winston.transports.DailyRotateFile({
+      filename: 'exceptions.log',
+      dirname: path.resolve(process.cwd(), 'logging', 'exceptions'),
+      maxSize: '10m',
+      maxFiles: '30d',
+      zippedArchive: false,
+      datePattern: 'YYYY-MM-DD',
+      handleExceptions: true
+    })
+  ],
+  rejectionHandlers: [
+    new winston.transports.DailyRotateFile({
+      filename: 'rejections.log',
+      dirname: path.resolve(process.cwd(), 'logging', 'rejections'),
+      maxSize: '10m',
+      maxFiles: '30d',
+      zippedArchive: false,
+      datePattern: 'YYYY-MM-DD',
+      handleRejections: true
     })
   ]
 });
+
+export default Logger;

@@ -1,6 +1,6 @@
-import { IInstructor } from '@src/model/framework/user/instructor.model';
+import { IInstructorDocument } from '@src/model/framework/user/instructor.model';
 import mongoose, { Document } from 'mongoose';
-import { IFaculty } from '@src/model/category/faculty/faculty.model';
+import { IFacultyDocument } from '@src/model/category/faculty/faculty.model';
 import { FacultyRole } from '@src/constants/enum/faculty/facultyRole.enum';
 
 export interface IFacultyRole {
@@ -10,8 +10,8 @@ export interface IFacultyRole {
 }
 
 export interface IInstructorFaculty extends Document {
-  instructor: IInstructor;
-  faculty: IFaculty;
+  instructor: IInstructorDocument;
+  faculty: IFacultyDocument;
   roles: IFacultyRole[];
 }
 

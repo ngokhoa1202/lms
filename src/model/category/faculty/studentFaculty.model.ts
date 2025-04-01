@@ -1,14 +1,14 @@
 import { IStudent } from '@src/model/framework/user/student.model';
 import mongoose, { Document } from 'mongoose';
-import { IFaculty } from '@src/model/category/faculty/faculty.model';
-import { IUniversity } from '@src/model/category/organization/university.model';
+import { IFacultyDocument } from '@src/model/category/faculty/faculty.model';
+import { IUniversityDocument } from '@src/model/category/organization/university.model';
 import { AcademicGrade } from '@src/constants/enum/degree/academicGrade.enum';
 import { GraduateStatus } from '@src/constants/enum/graduateStatus.enum';
 
 export interface IStudentFacultyUniversity extends Document {
   student: IStudent;
-  faculty: IFaculty;
-  university: IUniversity;
+  faculty: IFacultyDocument;
+  university: IUniversityDocument;
   status: GraduateStatus;
   graduateGrade: AcademicGrade;
   enrollmentDate: Date;

@@ -4,5 +4,6 @@ export enum UserRole {
   INSTRUCTOR = 'Instructor',
   CREATOR = 'Creator',
   AUDITOR = 'Auditor',
-  ADMIN = 'Admin'
+  ADMIN = 'Admin',
+  NONE = 'None'
 }

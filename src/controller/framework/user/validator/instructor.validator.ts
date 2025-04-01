@@ -10,7 +10,6 @@ const gettingById = [
 ];
 
 const creation = [
-  ...UserValidator.creation,
   body('degrees').isArray({ min: 0, max: 10 }).withMessage('Degrees must be an array of up to 10 elements'),
   body('degrees.*.rank').trim().escape().notEmpty().withMessage('Each degree rank must not be empty')
     .isIn(Object.values(AcademicRank)).withMessage(`Each degree rank must be one of the following values: ${Object.values(AcademicRank)}`),
@@ -18,8 +17,10 @@ const creation = [
     .isLength({ max: 255 }).withMessage('Each degree major must be at most 255 characters long'),
   body('degrees.*.issueDate').trim().escape().notEmpty().withMessage('Each degree achieve date must not be empty')
     .isISO8601().withMessage('Each degree issue date must be a valid date in ISO 8601 format'),
-  body('degree.*.universityId').trim().escape().notEmpty().withMessage('Each degree university ID must not be empty')
+  body('degrees.*.universityId').trim().escape().notEmpty().withMessage('Each degree university ID must not be empty')
     .isInt({ min: 1 }).withMessage('Each degree university ID must be a positive integer'),
+  body('degrees.*.facultyId').trim().escape().notEmpty().withMessage('Each degree faculty ID must not be empty')
+    .isInt({ min: 1 }).withMessage('Each degree faculty ID must be a positive integer'),
   body('degrees.*.studyFormat').trim().escape().notEmpty().withMessage('Each degree study format must not be empty')
     .isIn(Object.values(StudyFormat))
     .withMessage(`Each degree study format must be one of the following values: ${Object.values(StudyFormat)}`),

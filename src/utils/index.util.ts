@@ -1,6 +1,13 @@
 import dayjs from 'dayjs';
-import he from 'he';
+import Jwt from 'jsonwebtoken';
+import * as Uuid from 'uuid';
+import bcrypt from 'bcrypt';
 
-const Util = { dayjs, he };
 
+const Util = {
+  dayjs,
+  Jwt,
+  Uuid,
+  bcrypt
+};
 export default Util;

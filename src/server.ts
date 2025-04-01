@@ -9,6 +9,7 @@ import { connectDb } from './config/db.config';
 import swaggerUi from 'swagger-ui-express';
 import { swaggerDocs } from './config/swagger.config';
 import Middleware from './middleware/index.middleware';
+import cookieParser from 'cookie-parser';
 
 (async () => {
   await connectDb(ENV.DbHost, ENV.DbPort, ENV.DbUsername, ENV.DbPassword, ENV.DbName);
@@ -19,6 +20,7 @@ const app = express();
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json({ limit: '50mb' }));
 
+app.use(cookieParser());
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocs));
 app.use('/api', apiRouter);
 app.use(Middleware.handleError);

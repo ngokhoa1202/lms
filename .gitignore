@@ -7,7 +7,6 @@ dist
 .yarnrc.yml
 .tsbuildinfo
 .yarn
-.editorconfig
 config.js
 .idea
 secrets

@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import { configUserRoute } from './fwUser/user.route';
+import { configUserRoute } from './framework/user/user.route';
 
 const apiRouter = Router();
 
